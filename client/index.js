@@ -9,7 +9,7 @@ const createQueryString = (inputArray) => {
   const radioDivision = document.getElementById("radioDivision").checked;
   const radioRemainder = document.getElementById("radioRemainder").checke;
 
-  let queryStr = `leftOperand=${leftOp}&rightOperand=${rightOp}&operation=`;
+  let queryStr = `http://localhost:8080/leftOperand=${leftOp}&rightOperand=${rightOp}&operation=`;
 
   //Create error checking function to ensure multiple operators have not been selectes.
   //Ensure left and right Operands are of correct type (Number).
@@ -29,7 +29,39 @@ const createQueryString = (inputArray) => {
   return queryStr;
 };
 
+const makeRequest =(query) => {
+  const httpRequest = new XMLHttpRequest();
+
+  if (!httpRequest) {
+    console.log(' Cannot create an XMLHTTP instance');
+    return false;
+  }
+
+  httpRequest.onreadystatechange = handleResponse;
+  httpRequest.open('GET', query);
+  httpRequest.send();
+
+  function handleResponse() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        alert(httpRequest.responseText);
+        //This should show JSON formatted response.
+        //Update expressiona and result
+        
+      } else {
+        console.log('There was a problem with the request.');
+      }
+    }
+  }
+
+}
+
+
+
 const makeCalculation = () => {
   const queryString = createQueryString();
+
   console.log(`query string:\n${queryString}`)
+
+  makeRequest(queryString);
 };
