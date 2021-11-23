@@ -7,26 +7,40 @@
   </head>
   <body>
     <h2>Calculator</h2>
+
     <table>
+      <form>
       <tr>
         <th>Left Operand</th>
         <th></th>
         <th>Right Operand</th>
       </tr>
       <tr>
+        <th><input type="text" id="leftOp"></th>
         <th></th>
-        <th>
-          <br>+ Addition 
-          <br>- Subtraction 
-          <br>* Multiplication
-          <br>/ Division
-          <br>% Remainder
+        <th><input type="text" id="rightOp"></th>
+      </tr>
+      <tr>
+        <th>          
         </th>
-        <th></th>
+        <th>
+          <br><input type="radio" value="+ Addition">
+            <label for="+ Addition">+ Addition</label> 
+          <br><input type="radio" value="- Subtraction">
+            <label for="- Subtraction">- Subtraction</label> 
+          <br><input type="radio" value="* Multiplication">
+            <label for="* Multiplication">* Multiplication</label>
+          <br><input type="radio" value="/ Division">
+            <label for="/ Division">/ Division</label>
+          <br><input type="radio" value="% Remainder">
+            <label for="% Remainder">% Remainder</label>
+        </th>
+        <th>          
+        </th>
       </tr>
       <tr>
         <th>
-          Calculate
+          <input type="submit" value="Calculate">
         </th>
       </tr>
       <tr>
@@ -39,6 +53,7 @@
           Result:
         </th>
       </tr>
+      </form>
     </table>
   </body>
 </html>
