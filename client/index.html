@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Calculator</title>
+    <script type="text/javascript" src="./index.js"></script>
   </head>
   <body>
     <h2>Calculator</h2>
@@ -40,20 +41,26 @@
       </tr>
       <tr>
         <th>
-          <input type="submit" value="Calculate">
+          <input id="calculate" type="button" value="Calculate" onclick="makeCalculation()">
         </th>
       </tr>
       <tr>
         <th>
           Expression:
         </th>
+        <th id ="calculation-expression">          
+        </th>
       </tr>
       <tr>
         <th>
           Result:
         </th>
+        <th id="calculation-result">         
+        </th>
       </tr>
       </form>
     </table>
+
+
   </body>
 </html>
