@@ -1,8 +1,9 @@
 import java.io.*;
 import java.net.Socket;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-class RequestProcessor implements Runnable {
+public class RequestProcessor implements Runnable {
 	private Socket socket = null;
 	private OutputStream os = null;
 	private BufferedReader in = null;
@@ -22,15 +23,26 @@ class RequestProcessor implements Runnable {
 		}
 	}
 
-	public void run () {
-		// write your code here
+	public void run() {
 
-		// end of your code
-		String response = msgToClient + jsonObject.toString();
-		os.write(response.getBytes());
-		os.flush();
-		socket.close();
+		String incoming;
+		try {
+			incoming = in.readLine();
+			System.out.println(incoming);
+			jsonObject.put("Expression", "1 + 2");
+			jsonObject.put("Result", "3");
+		} catch (IOException | JSONException e) {
+			e.printStackTrace();
+		}
 
+		// Implemented this try/catch block to resolve unhandled error, errors.
+		try {
+			String response = msgToClient + jsonObject.toString();
+			os.write(response.getBytes());
+			os.flush();
+			socket.close();
+		} catch (IOException ioe) {
+
+		}
 	}
 }
-
