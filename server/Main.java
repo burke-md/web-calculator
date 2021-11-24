@@ -8,12 +8,14 @@ public class Main {
 
 		try {
 			serverSocket = new ServerSocket(8080);
+			System.out.println("Server listening on 8080");
 			while (true) {
 				Socket clientSocket = serverSocket.accept();
 				new RequestProcessor(clientSocket).run();
 			}
 		} catch (IOException e) {
-
+			System.out.println("Error");
+			System.out.println(e);
 		}
 	}
 }
