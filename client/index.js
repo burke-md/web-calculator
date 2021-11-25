@@ -7,11 +7,9 @@ const createQueryString = (inputArray) => {
     "radioMultiplication"
   ).checked;
   const radioDivision = document.getElementById("radioDivision").checked;
-  const radioRemainder = document.getElementById("radioRemainder").checke;
+  const radioRemainder = document.getElementById("radioRemainder").checked;
 
   let queryStr = `http://localhost:8080/leftOperand=${leftOp}&rightOperand=${rightOp}&operation=`;
-
-  //Create error checking function to ensure multiple operators have not been selected & left and right Operands are of correct type (Number).
 
   if (radioAddition) {
     queryStr += `+`;
@@ -47,6 +45,7 @@ const makeRequest = (query) => {
         const expression = objResponse.Expression;
         const result = objResponse.Result;
 
+        //Set values based on response.
         document.getElementById("calculation-expression").innerText =
           expression;
         document.getElementById("calculation-result").innerText = result;
