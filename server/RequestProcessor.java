@@ -31,7 +31,7 @@ public class RequestProcessor implements Runnable {
 		try {
 			incoming = in.readLine();
 			System.out.println(incoming);
-			
+			//
 			String leftOp = "";
 		    boolean leftOpComplete = false;
 		    String rightOp = "";
@@ -68,7 +68,7 @@ public class RequestProcessor implements Runnable {
 		    System.out.println(rightOp);
 		    System.out.println(operation); 
 		    
-			
+			//
 			jsonObject.put("Expression", "1 + 2");
 			jsonObject.put("Result", "3");
 		} catch (IOException | JSONException e) {
