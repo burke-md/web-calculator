@@ -31,12 +31,12 @@ public class RequestProcessor implements Runnable {
 			incoming = in.readLine();
 			System.out.println(incoming);
 
+			// Parse through query string.
 			String leftOp = "";
 			boolean leftOpComplete = false;
 			String rightOp = "";
 			boolean rightOpComplete = false;
 			char operation = 'x';
-
 			for (int i = 17; i < incoming.length(); i++) {
 
 				// add char to leftOp
@@ -62,12 +62,8 @@ public class RequestProcessor implements Runnable {
 				}
 			}
 
-			System.out.println(leftOp);
-			System.out.println(rightOp);
-			System.out.println(operation);
-
+			// Handle operator as a char value.
 			float total = 0;
-
 			if (operation == '+') {
 				total = Float.parseFloat(leftOp) + Float.parseFloat(rightOp);
 			} else if (operation == '-') {
@@ -80,6 +76,7 @@ public class RequestProcessor implements Runnable {
 				total = Float.parseFloat(leftOp) % Float.parseFloat(rightOp);
 			}
 
+			// Build JSON Obj for response.
 			jsonObject.put("Expression", leftOp + operation + rightOp);
 			jsonObject.put("Result", total);
 		} catch (IOException | JSONException e) {
