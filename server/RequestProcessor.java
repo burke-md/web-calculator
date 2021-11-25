@@ -66,18 +66,18 @@ public class RequestProcessor implements Runnable {
 			System.out.println(rightOp);
 			System.out.println(operation);
 
-			int total = 0;
+			float total = 0;
 
 			if (operation == '+') {
-				total = Integer.parseInt(leftOp) + Integer.parseInt(rightOp);
+				total = Float.parseFloat(leftOp) + Float.parseFloat(rightOp);
 			} else if (operation == '-') {
-				total = Integer.parseInt(leftOp) - Integer.parseInt(rightOp);
+				total = Float.parseFloat(leftOp) - Float.parseFloat(rightOp);
 			} else if (operation == '*') {
-				total = Integer.parseInt(leftOp) * Integer.parseInt(rightOp);
+				total = Float.parseFloat(leftOp) * Float.parseFloat(rightOp);
 			} else if (operation == '/') {
-				total = Integer.parseInt(leftOp) / Integer.parseInt(rightOp);
+				total = Float.parseFloat(leftOp) / Float.parseFloat(rightOp);
 			} else if (operation == '%') {
-				total = Integer.parseInt(leftOp) % Integer.parseInt(rightOp);
+				total = Float.parseFloat(leftOp) % Float.parseFloat(rightOp);
 			}
 
 			jsonObject.put("Expression", leftOp + operation + rightOp);
