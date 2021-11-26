@@ -1,6 +1,6 @@
 const makeCalculation = () => {
-  const validInput = validateOperands();
-  if (validInput){
+  const validInput = validateOperands() && operatorSelected();
+  if (validInput) {
     const queryString = createQueryString();
     makeRequest(queryString);
   }
@@ -12,7 +12,9 @@ const createQueryString = () => {
   const rightOp = document.getElementById("rightOp").value;
   const radioAddition = document.getElementById("radioAddition").checked;
   const radioSubtraction = document.getElementById("radioSubtraction").checked;
-  const radioMultiplication = document.getElementById("radioMultiplication").checked;
+  const radioMultiplication = document.getElementById(
+    "radioMultiplication"
+  ).checked;
   const radioDivision = document.getElementById("radioDivision").checked;
   const radioRemainder = document.getElementById("radioRemainder").checked;
 
@@ -28,8 +30,7 @@ const createQueryString = () => {
     queryStr += `/`;
   } else if (radioRemainder) {
     queryStr += `%`;
-
-  } 
+  }
 
   return queryStr;
 };
@@ -56,7 +57,8 @@ const makeRequest = (queryString) => {
 };
 
 const displayResults = (resObj) => {
-  document.getElementById("calculation-expression").innerText = resObj.Expression;
+  document.getElementById("calculation-expression").innerText =
+    resObj.Expression;
   document.getElementById("calculation-result").innerText = resObj.Result;
 };
 
@@ -68,7 +70,7 @@ const clearInputs = () => {
   document.getElementById("radioRemainder").checked = false;
   document.getElementById("leftOp").value = "";
   document.getElementById("rightOp").value = "";
-}
+};
 
 const validateOperands = () => {
   const leftOp = document.getElementById("leftOp").value;
@@ -76,10 +78,41 @@ const validateOperands = () => {
   //String numbers.
   const acceptedChars = /^[0-9.]+$/;
 
-  if (leftOp.match(acceptedChars) && rightOp.match(acceptedChars)){
+  if (leftOp.match(acceptedChars) && rightOp.match(acceptedChars)) {
     return true;
   }
 
-  alert(`Invalid input`)
+  alert(`Invalid input.`);
   return false;
-}
+};
+
+const operatorSelected = () => {
+  const radioAddition = document.getElementById("radioAddition").checked;
+  const radioSubtraction = document.getElementById("radioSubtraction").checked;
+  const radioMultiplication = document.getElementById(
+    "radioMultiplication"
+  ).checked;
+  const radioDivision = document.getElementById("radioDivision").checked;
+  const radioRemainder = document.getElementById("radioRemainder").checked;
+
+  const operatorList = [
+    radioAddition,
+    radioSubtraction,
+    radioMultiplication,
+    radioDivision,
+    radioRemainder,
+  ];
+
+  let opSelected = false;
+
+  operatorList.forEach((operator) => {
+    if (operator) opSelected = true;
+  });
+
+  if (opSelected) {
+    return true;
+  } else {
+    alert(`No operator has been selected.`);
+    return false;
+  }
+};
