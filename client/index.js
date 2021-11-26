@@ -7,6 +7,8 @@ const makeCalculation = () => {
   clearInputs();
 };
 
+//Helper functions below.
+
 const createQueryString = () => {
   const leftOp = document.getElementById("leftOp").value;
   const rightOp = document.getElementById("rightOp").value;
@@ -75,9 +77,8 @@ const clearInputs = () => {
 const validateOperands = () => {
   const leftOp = document.getElementById("leftOp").value;
   const rightOp = document.getElementById("rightOp").value;
-  //String numbers.
   const acceptedChars = /^[0-9.]+$/;
-
+  
   if (leftOp.match(acceptedChars) && rightOp.match(acceptedChars)) {
     return true;
   }
