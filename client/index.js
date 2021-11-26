@@ -1,6 +1,9 @@
 const makeCalculation = () => {
-  const queryString = createQueryString();
-  makeRequest(queryString);
+  const validInput = validateOperands();
+  if (validInput){
+    const queryString = createQueryString();
+    makeRequest(queryString);
+  }
   clearInputs();
 };
 
@@ -65,4 +68,16 @@ const clearInputs = () => {
   document.getElementById("radioRemainder").checked = false;
   document.getElementById("leftOp").value = "";
   document.getElementById("rightOp").value = "";
+}
+
+const validateOperands = () => {
+  const leftOp = document.getElementById("leftOp").value;
+  const rightOp = document.getElementById("rightOp").value;
+  //String contains only numbers.
+  const acceptedChars = /^[0-9]+$/;
+  if (leftOp.match(acceptedChars) && rightOp.match(acceptedChars)){
+    return true;
+  } 
+  alert(`Non-numeric input`);
+  return false;
 }
