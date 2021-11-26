@@ -1,4 +1,9 @@
-const createQueryString = (inputArray) => {
+const makeCalculation = () => {
+  const queryString = createQueryString();
+  makeRequest(queryString);
+};
+
+const createQueryString = () => {
   const leftOp = document.getElementById("leftOp").value;
   const rightOp = document.getElementById("rightOp").value;
   const radioAddition = document.getElementById("radioAddition").checked;
@@ -28,12 +33,10 @@ const createQueryString = (inputArray) => {
 
 const makeRequest = (query) => {
   const httpRequest = new XMLHttpRequest();
-
   if (!httpRequest) {
     console.log(" Cannot create an XMLHTTP instance");
     return false;
   }
-
   httpRequest.onreadystatechange = handleResponse;
   httpRequest.open("GET", query);
   httpRequest.send();
@@ -42,13 +45,7 @@ const makeRequest = (query) => {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
         const objResponse = JSON.parse(httpRequest.responseText);
-        const expression = objResponse.Expression;
-        const result = objResponse.Result;
-
-        //Set values based on response.
-        document.getElementById("calculation-expression").innerText =
-          expression;
-        document.getElementById("calculation-result").innerText = result;
+        updateCalculator(objResponse);
       } else {
         console.log("There was a problem with the request.");
       }
@@ -56,7 +53,15 @@ const makeRequest = (query) => {
   }
 };
 
-const makeCalculation = () => {
-  const queryString = createQueryString();
-  makeRequest(queryString);
+const updateCalculator = (resObj) => {
+  document.getElementById("radioAddition").checked = false;
+  document.getElementById("radioSubtraction").checked = false;
+  document.getElementById("radioMultiplication").checked = false;
+  document.getElementById("radioDivision").checked = false;
+  document.getElementById("radioRemainder").checked = false;
+  document.getElementById("leftOp").value = "";
+  document.getElementById("rightOp").value = "";
+
+  document.getElementById("calculation-expression").innerText = resObj.Expression;
+  document.getElementById("calculation-result").innerText = resObj.Result;
 };
