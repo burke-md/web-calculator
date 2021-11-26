@@ -1,9 +1,6 @@
 const makeCalculation = () => {
   const queryString = createQueryString();
-  if(queryString !== false){
-    console.log(queryString)
-    makeRequest(queryString);
-  }
+  makeRequest(queryString);
   clearInputs();
 };
 
