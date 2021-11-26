@@ -73,11 +73,13 @@ const clearInputs = () => {
 const validateOperands = () => {
   const leftOp = document.getElementById("leftOp").value;
   const rightOp = document.getElementById("rightOp").value;
-  //String contains only numbers.
-  const acceptedChars = /^[0-9]+$/;
+  //String numbers.
+  const acceptedChars = /^[0-9.]+$/;
+
   if (leftOp.match(acceptedChars) && rightOp.match(acceptedChars)){
     return true;
-  } 
-  alert(`Non-numeric input`);
+  }
+
+  alert(`Invalid input`)
   return false;
 }
