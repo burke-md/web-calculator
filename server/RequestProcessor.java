@@ -44,7 +44,7 @@ public class RequestProcessor implements Runnable {
 					leftOp += incoming.charAt(i);
 				}
 
-				// set left op as complete
+				// set leftOp as complete
 				if (!leftOpComplete && incoming.charAt(i) == '&') {
 					leftOpComplete = true;
 					i += 14;
