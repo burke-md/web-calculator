@@ -1,6 +1,10 @@
 const makeCalculation = () => {
   const queryString = createQueryString();
-  makeRequest(queryString);
+  if(queryString !== false){
+    console.log(queryString)
+    makeRequest(queryString);
+  }
+  clearInputs();
 };
 
 const createQueryString = () => {
@@ -8,9 +12,7 @@ const createQueryString = () => {
   const rightOp = document.getElementById("rightOp").value;
   const radioAddition = document.getElementById("radioAddition").checked;
   const radioSubtraction = document.getElementById("radioSubtraction").checked;
-  const radioMultiplication = document.getElementById(
-    "radioMultiplication"
-  ).checked;
+  const radioMultiplication = document.getElementById("radioMultiplication").checked;
   const radioDivision = document.getElementById("radioDivision").checked;
   const radioRemainder = document.getElementById("radioRemainder").checked;
 
@@ -26,26 +28,26 @@ const createQueryString = () => {
     queryStr += `/`;
   } else if (radioRemainder) {
     queryStr += `%`;
-  }
+
+  } 
 
   return queryStr;
 };
 
-const makeRequest = (query) => {
+const makeRequest = (queryString) => {
   const httpRequest = new XMLHttpRequest();
   if (!httpRequest) {
     console.log(" Cannot create an XMLHTTP instance");
     return false;
   }
   httpRequest.onreadystatechange = handleResponse;
-  httpRequest.open("GET", query);
+  httpRequest.open("GET", queryString);
   httpRequest.send();
-
   function handleResponse() {
     if (httpRequest.readyState === XMLHttpRequest.DONE) {
       if (httpRequest.status === 200) {
         const objResponse = JSON.parse(httpRequest.responseText);
-        updateCalculator(objResponse);
+        displayResults(objResponse);
       } else {
         console.log("There was a problem with the request.");
       }
@@ -53,7 +55,12 @@ const makeRequest = (query) => {
   }
 };
 
-const updateCalculator = (resObj) => {
+const displayResults = (resObj) => {
+  document.getElementById("calculation-expression").innerText = resObj.Expression;
+  document.getElementById("calculation-result").innerText = resObj.Result;
+};
+
+const clearInputs = () => {
   document.getElementById("radioAddition").checked = false;
   document.getElementById("radioSubtraction").checked = false;
   document.getElementById("radioMultiplication").checked = false;
@@ -61,7 +68,4 @@ const updateCalculator = (resObj) => {
   document.getElementById("radioRemainder").checked = false;
   document.getElementById("leftOp").value = "";
   document.getElementById("rightOp").value = "";
-
-  document.getElementById("calculation-expression").innerText = resObj.Expression;
-  document.getElementById("calculation-result").innerText = resObj.Result;
-};
+}
